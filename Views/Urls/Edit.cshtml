@@ -1,0 +1,23 @@
+﻿@model UrlShortener.Models.ShortenedUrl
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <strong>@Html.DisplayNameFor(model => model.Url)</strong>
+        @Html.DisplayFor(model => model.Url)
+        <strong>@Html.DisplayNameFor(model => model.Hash)</strong>
+        @Html.DisplayFor(model => model.Hash)
+    </div>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Update", "Urls", FormMethod.Get))
+    {
+        <input type="url" required name="Url" value="@Html.DisplayFor(model => model.Url)" />
+        @Html.HiddenFor(model => model.Id)
+        <button type="submit" class="btn btn-info">Zapisz</button>
+    }
+</div>

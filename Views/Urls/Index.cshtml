@@ -1,0 +1,32 @@
+@model List<UrlShortener.Models.ShortenedUrl>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="row" style="margin: 30px">
+    @using (Html.BeginForm("Create", "Urls", FormMethod.Post))
+    {
+        <input type="url" required name="url" placeholder="Url"/>
+        <button type="submit" class="btn btn-info">Zapisz</button>
+    }
+</div>
+<div class="row">
+    <table class="table">
+        <thead>
+            <td>Url</td>
+            <td>Short link</td>
+            <td>Actions</td>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><strong>Url: </strong> @Html.DisplayFor(model => item.Url) </td>
+                <td><strong>Hash link: </strong> <a href="/@Html.DisplayFor(model => item.Hash)" target="_blank">@Html.DisplayFor(model => item.Hash)</a> </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Urls", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", "Urls", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
